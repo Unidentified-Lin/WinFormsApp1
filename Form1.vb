@@ -1,15 +1,8 @@
-﻿Imports Newtonsoft
-Imports Newtonsoft.Json
-Imports Newtonsoft.Json.Linq
-Imports RestSharp
-Imports System.ComponentModel
+﻿Imports Newtonsoft.Json
 Imports System.IO
-Imports System.Linq
 Imports System.Net
 Imports System.Net.Http
 Imports System.Net.Http.Json
-Imports System.Reflection
-Imports System.Runtime.CompilerServices
 Imports System.Text
 Imports System.Text.Json
 Imports System.Text.Json.Serialization
@@ -63,9 +56,7 @@ Public Class Form1
         Dim response As Task(Of HttpResponseMessage) = client.SendAsync(request)
         Dim content As HttpContent = response.Result.Content
         Dim jsonString As String = Await content.ReadAsStringAsync()
-        Dim jsonData As T = Await content.ReadFromJsonAsync(Of T)(New JsonSerializerOptions With {
-            .NumberHandling = JsonNumberHandling.WriteAsString
-        })
+        Dim jsonData As T = Await content.ReadFromJsonAsync(Of T)
         Return Tuple.Create(jsonString, jsonData)
     End Function
 
