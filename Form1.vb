@@ -2,36 +2,17 @@
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 Imports RestSharp
+Imports System.ComponentModel
 Imports System.IO
 Imports System.Linq
 Imports System.Net
+Imports System.Net.Http
+Imports System.Net.Http.Json
+Imports System.Reflection
+Imports System.Runtime.CompilerServices
 Imports System.Text
 
 Public Class Form1
-    Public Class Customer
-        Public Property Id As String
-        Public Property Email As String
-        Public Property First_name As String
-        Public Property Last_name As String
-        Public Property Phone As String
-        Public Property Note As String
-        Public Property Tags As String
-        Public Property State As String
-        Public Property Currency As String
-        Public Property Tax_exempt As String
-        Public Property Verified_email As String
-        Public Property Accepts_marketing As String
-        Public Property Accepts_marketing_updated_at As String
-        Public Property Orders_count As String
-        Public Property Total_spent As String
-        Public Property Last_order_id As String
-        Public Property Last_order_name As String
-        Public Property Created_at As String
-        Public Property Updated_at As String
-        Public Property Addresses As String
-
-    End Class
-
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
@@ -45,11 +26,25 @@ Public Class Form1
         Dim HasNext As Boolean = True
         Dim Head As String = "https://" & Username & ":" & Password & "@" & Shop & ".myshopify.com"
         Dim Resource As String = GetCustomers
-        Dim Query As String = "?limit=250"
+        Dim Query As String = "?limit=2"
         Dim Url As String = Head + Resource + Query
         Dim mLogiKey As Byte() = Encoding.Default.GetBytes(Username + ":" + Password)
         Dim LoginKey As String = "Basic " + Convert.ToBase64String(mLogiKey)
 
+        'Using HttpClient (replace Async Function with Sub)
+        'Dim client = New HttpClient
+        'client.BaseAddress = New Uri(Url)
+        'client.DefaultRequestHeaders.Accept.Clear()
+        'client.DefaultRequestHeaders.Accept.Add(New Headers.MediaTypeWithQualityHeaderValue("application/json"))
+        'client.DefaultRequestHeaders.Authorization = New Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(mLogiKey))
+        'Dim request = New HttpRequestMessage(HttpMethod.Get, Url)
+        'Dim response As Task(Of HttpResponseMessage) = client.SendAsync(request)
+
+        'Dim jsonString As String = Await response.Result.Content.ReadAsStringAsync()
+        'Dim jsonData As CustomerList = Await response.Result.Content.ReadFromJsonAsync(Of CustomerList)
+        'TextBox1.Text = jsonString
+
+        'Using WebRequest
         Dim myWebRequest As WebRequest = WebRequest.Create(Url)
         myWebRequest.ContentType = "application/JSON"
         myWebRequest.Method = "GET"
@@ -58,9 +53,12 @@ Public Class Form1
         Dim StreamRead As StreamReader = New StreamReader(myWebResponse.GetResponseStream())
         Dim ProductsJSON As String = StreamRead.ReadToEnd()
         Me.TextBox1.Text = ProductsJSON
+        Dim obj = JsonConvert.DeserializeObject(Of CustomerList)(ProductsJSON)
 
 
+        DataGridView1.AddObjDatas(obj.Customers)
 
         MsgBox("OK !")
     End Sub
+
 End Class
