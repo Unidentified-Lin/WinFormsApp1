@@ -41,7 +41,15 @@ Module DataGridViewExtension
     End Sub
     <Extension()>
     Public Sub AddObjDatas(Of T)(dgv As DataGridView, dataObjs As T())
-        dgv.AddColumns(GetType(T))
+        If dgv.Columns.Count.Equals(0) Then
+            dgv.AddColumns(GetType(T))
+        End If
+        'Dim list = New List(Of T)
+        'If dgv.DataSource IsNot Nothing Then
+        '    list.AddRange(dgv.DataSource)
+        'End If
+        'list.AddRange(dataObjs)
+        'dgv.DataSource = list
         dgv.DataSource = dataObjs
     End Sub
 End Module
