@@ -1,12 +1,4 @@
 ﻿Imports ClassLibrary1.Utils
-Imports Newtonsoft.Json
-Imports System.IO
-Imports System.Net
-Imports System.Net.Http
-Imports System.Net.Http.Json
-Imports System.Text
-Imports System.Text.Json
-Imports System.Text.Json.Serialization
 Imports WinFormsLibrary1.Extensions
 
 Public Class Form1
