@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,13 +20,14 @@ Partial Class Form1
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.NextPage = New System.Windows.Forms.Button()
         Me.PreviousPage = New System.Windows.Forms.Button()
+        Me.Limit = New System.Windows.Forms.TextBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -92,11 +93,22 @@ Partial Class Form1
         Me.PreviousPage.UseVisualStyleBackColor = True
         Me.PreviousPage.Visible = False
         '
+        'Limit
+        '
+        Me.Limit.Font = New System.Drawing.Font("Microsoft JhengHei UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.Limit.Location = New System.Drawing.Point(786, 39)
+        Me.Limit.Name = "Limit"
+        Me.Limit.Size = New System.Drawing.Size(100, 28)
+        Me.Limit.TabIndex = 5
+        Me.Limit.Text = "20"
+        Me.Limit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1241, 591)
+        Me.Controls.Add(Me.Limit)
         Me.Controls.Add(Me.PreviousPage)
         Me.Controls.Add(Me.NextPage)
         Me.Controls.Add(Me.DataGridView1)
@@ -116,4 +128,5 @@ Partial Class Form1
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents NextPage As Button
     Friend WithEvents PreviousPage As Button
+    Friend WithEvents Limit As TextBox
 End Class
