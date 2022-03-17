@@ -1,22 +1,37 @@
-﻿Imports ClassLibrary1.Utils
+﻿Imports System.IO
+Imports ClassLibrary1.Utils
 Imports WinFormsLibrary1.Extensions
 
 Public Class Form1
-    Private _baseUrl As String = "https://ivanleathercraft.myshopify.com/admin/api/2020-10/"
-    Private _username As String = "ad2ce1bbb53cda0c801fc989e3ff304f"
-    Private _password As String = "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"
+    Private ReadOnly _retailEnvFile As String = "retail_env.yml"
+    Private _retailEnv As IDictionary(Of String, String)
 
     Private _currentResponseModel As ResponseModel(Of CustomerList)
 
+    Public ReadOnly Property GetEnv(key As String) As String
+        Get
+            If _retailEnv IsNot Nothing Then
+                Return _retailEnv(key)
+            End If
+
+            Dim exist = File.Exists(_retailEnvFile)
+            If Not exist Then
+                Throw New Exception($"File {_retailEnvFile} not exist")
+            End If
+            _retailEnv = DotEnvFile.LoadFile(_retailEnvFile, True)
+
+            Return _retailEnv(key)
+        End Get
+    End Property
     Public ReadOnly Property GetKey() As String
         Get
-            Return APIUtil.GetAuthorizationString(_username, _password)
+            Return APIUtil.GetAuthorizationString(GetEnv("api_key"), GetEnv("api_pass"))
         End Get
     End Property
 
     Private Async Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         'Using HttpClient
-        Dim client = APIUtil.GetHttpClient(_baseUrl, GetKey())
+        Dim client = APIUtil.GetHttpClient($"{GetEnv("shop_api")}/admin/api/2022-01/", GetKey())
 
         _currentResponseModel = Await APIUtil.GetResponseAsync(Of CustomerList)(client, $"customers.json?limit={Limit.Text}")
 
@@ -34,7 +49,7 @@ Public Class Form1
             Return
         End If
 
-        Dim client = APIUtil.GetHttpClient(_baseUrl, GetKey())
+        Dim client = APIUtil.GetHttpClient(GetEnv("shop_api"), GetKey())
         _currentResponseModel = Await APIUtil.GetResponseAsync(Of CustomerList)(client, directionUrl)
         TextBox1.Text = _currentResponseModel.JsonString
         DataGridView1.AddObjDatas(_currentResponseModel.JsonData.Customers)

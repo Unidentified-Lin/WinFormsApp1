@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotEnvFile" Version="2.1.0" />
+    <PackageReference Include="FSharp.Core" Version="6.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="ShopifySharp" Version="5.15.0" />
     <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj" />
     <ProjectReference Include="..\WinFormsLibrary1\WinFormsLibrary1.csproj" />
   </ItemGroup>
@@ -29,9 +33,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="env.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Update="retail_env.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
