@@ -28,6 +28,7 @@ Partial Class Form1
         Me.NextPage = New System.Windows.Forms.Button()
         Me.PreviousPage = New System.Windows.Forms.Button()
         Me.Limit = New System.Windows.Forms.TextBox()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -45,12 +46,12 @@ Partial Class Form1
         '
         Me.TextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TextBox1.Location = New System.Drawing.Point(10, 78)
+        Me.TextBox1.Location = New System.Drawing.Point(10, 92)
         Me.TextBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox1.Size = New System.Drawing.Size(407, 507)
+        Me.TextBox1.Size = New System.Drawing.Size(407, 493)
         Me.TextBox1.TabIndex = 1
         '
         'DataGridView1
@@ -103,11 +104,22 @@ Partial Class Form1
         Me.Limit.Text = "20"
         Me.Limit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ProgressBar1.Location = New System.Drawing.Point(10, 64)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(407, 23)
+        Me.ProgressBar1.TabIndex = 6
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1241, 591)
+        Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.Limit)
         Me.Controls.Add(Me.PreviousPage)
         Me.Controls.Add(Me.NextPage)
@@ -129,4 +141,5 @@ Partial Class Form1
     Friend WithEvents NextPage As Button
     Friend WithEvents PreviousPage As Button
     Friend WithEvents Limit As TextBox
+    Friend WithEvents ProgressBar1 As ProgressBar
 End Class
