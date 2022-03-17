@@ -363,4 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # env configuration
-env.yml
+*_env.yml
