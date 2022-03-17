@@ -78,6 +78,7 @@ namespace ClassLibrary1.Utils
             bool hasNext;
             do
             {
+                url = !string.IsNullOrEmpty(model.NextUrl) ? model.NextUrl : url;
                 var responseModel = await GetResponseAsync<T>(client, url);
                 hasNext = responseModel.HasNext;
                 model.JsonDataList.Add(responseModel.JsonData);
