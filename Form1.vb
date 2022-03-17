@@ -1,4 +1,6 @@
 ﻿Imports Newtonsoft.Json
+Imports ShopifySharp
+Imports ShopifySharp.Lists
 Imports System.IO
 Imports System.Net
 Imports System.Net.Http
@@ -27,9 +29,13 @@ Public Class Form1
         Dim LoginKey As String = "Basic " + Convert.ToBase64String(mLogiKey)
 
         'Using HttpClient (replace Async Function with Sub)
-        Dim result = Await GetRequestWithHttpClient(Of CustomerList)(Url, mLogiKey)
-        TextBox1.Text = result.Item1
-        DataGridView1.AddObjDatas(result.Item2.Customers)
+        'Dim result = Await GetRequestWithHttpClient(Of CustomerList)(Url, mLogiKey)
+        'TextBox1.Text = result.Item1
+        'DataGridView1.AddObjDatas(result.Item2.Customers)
+
+        Dim service = New CustomerService("https://ivanleathercraft.myshopify.com", "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")
+        Dim result As ListResult(Of ShopifySharp.Customer) = Await service.ListAsync()
+        DataGridView1.AddObjDatas(result.Items.ToList())
 
         'Using WebRequest
         'Dim myWebRequest As WebRequest = WebRequest.Create(Url)
