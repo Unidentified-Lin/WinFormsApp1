@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -67,7 +68,7 @@ namespace WinFormsLibrary1.Extensions
         /// <param name="dgv"></param>
         /// <param name="dataObjs">物件資料陣列</param>
         /// <param name="isAppend">是否新增(預設刷新)</param>
-        public static void AddObjDatas<T>(this DataGridView dgv, T[] dataObjs, bool isAppend = false)
+        public static void AddObjDatas<T>(this DataGridView dgv, IEnumerable<T> dataObjs, bool isAppend = false)
         {
             if (dgv.Columns.Count.Equals(0))
             {
@@ -77,7 +78,7 @@ namespace WinFormsLibrary1.Extensions
             var list = new List<T>();
             if (isAppend && dgv.DataSource is not null)
             {
-                list.AddRange((T[])dgv.DataSource);
+                list.AddRange((IEnumerable<T>)dgv.DataSource);
             }
             list.AddRange(dataObjs);
             dgv.DataSource = list;
