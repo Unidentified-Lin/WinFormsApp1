@@ -40,11 +40,6 @@ Module DataGridViewExtension
         Next
     End Sub
     <Extension()>
-    Public Sub AddObjDatas(Of T)(dgv As DataGridView, dataObjs As T())
-        dgv.AddColumns(GetType(T))
-        dgv.DataSource = dataObjs
-    End Sub
-    <Extension()>
     Public Sub AddObjDatas(Of T)(dgv As DataGridView, dataObjs As IEnumerable(Of T))
         dgv.AddColumns(GetType(T))
         dgv.DataSource = dataObjs
