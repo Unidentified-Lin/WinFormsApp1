@@ -32,14 +32,7 @@ Public Class Form1
     End Property
 
     Private Async Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        'Using HttpClient
-        'Dim client = APIUtil.GetHttpClient($"{GetEnv("shop_api")}/admin/api/2022-01/", GetKey())
 
-        '_currentResponseModel = Await APIUtil.GetResponseAsync(Of CustomerList)(client, $"customers.json?limit={Limit.Text}")
-
-        'TextBox1.Text = _currentResponseModel.JsonString
-        'DataGridView1.AddObjDatas(_currentResponseModel.JsonData.Customers)
-        'StatusCheck()
         Dim service = New CustomerService(GetEnv("shop_api"), GetEnv("access_token"))
         Dim customers As List(Of ShopifySharp.Customer) = New List(Of ShopifySharp.Customer)()
 
@@ -62,6 +55,16 @@ Public Class Form1
 
     End Sub
 
+    Private Async Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim client = APIUtil.GetHttpClient($"{GetEnv("shop_api")}/admin/api/2022-01/", GetKey())
+
+        _currentResponseModel = Await APIUtil.GetResponseAsync(Of CustomerList)(client, $"customers.json?limit={Limit.Text}")
+
+        TextBox1.Text = _currentResponseModel.JsonString
+        DataGridView1.AddObjDatas(_currentResponseModel.JsonData.Customers)
+        StatusCheck()
+    End Sub
+
     Private Async Sub Page_ClickAsync(sender As Object, e As EventArgs) Handles NextPage.Click, PreviousPage.Click
         Dim direction As Boolean = IIf(CType(sender, Button).Name.Equals("NextPage"), _currentResponseModel.HasNext, _currentResponseModel.HasPrevious)
         Dim directionUrl As String = IIf(CType(sender, Button).Name.Equals("NextPage"), _currentResponseModel.NextUrl, _currentResponseModel.PreviousUrl)
@@ -81,5 +84,4 @@ Public Class Form1
         NextPage.Visible = _currentResponseModel.HasNext
         PreviousPage.Visible = _currentResponseModel.HasPrevious
     End Sub
-
 End Class

@@ -29,6 +29,7 @@ Partial Class Form1
         Me.PreviousPage = New System.Windows.Forms.Button()
         Me.Limit = New System.Windows.Forms.TextBox()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.Button2 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -39,7 +40,7 @@ Partial Class Form1
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(132, 52)
         Me.Button1.TabIndex = 0
-        Me.Button1.Text = "測試"
+        Me.Button1.Text = "全部"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'TextBox1
@@ -114,11 +115,22 @@ Partial Class Form1
         Me.ProgressBar1.Size = New System.Drawing.Size(407, 23)
         Me.ProgressBar1.TabIndex = 6
         '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(285, 6)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(2)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(132, 52)
+        Me.Button2.TabIndex = 7
+        Me.Button2.Text = "分頁"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1241, 591)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.Limit)
         Me.Controls.Add(Me.PreviousPage)
@@ -142,4 +154,5 @@ Partial Class Form1
     Friend WithEvents PreviousPage As Button
     Friend WithEvents Limit As TextBox
     Friend WithEvents ProgressBar1 As ProgressBar
+    Friend WithEvents Button2 As Button
 End Class
